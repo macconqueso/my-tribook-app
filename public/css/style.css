@@ -1,0 +1,539 @@
+/* Clearfix for clearing floats */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;  /* Ensure body takes up the full viewport height */
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Header Styling */
+.header {
+    width: 100%;
+    background-color: #009FB7;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.header__logo, .header__nav, .header__button {
+    margin: 0 auto;  /* Center content inside the header */
+}
+
+.header__logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.header__nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header__nav ul li {
+    margin: 0 10px;
+}
+
+.header__nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.header__nav a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #009FB7;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    margin-top: auto;  /* Ensure footer stays at the bottom */
+    position: relative;
+    bottom: 0;
+}
+
+/* Footer links */
+.footer .edit-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FED766;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.footer .edit-link:hover {
+    background-color: #FFD700;
+}
+
+/* Main Content: Apartments */
+main.container.apartments {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: flex-start;  /* Align items at the top */
+    padding: 20px;
+    margin: 0 auto;
+    background-color: white;
+    flex-grow: 1;
+    flex-wrap: wrap;  /* Allow the items to wrap onto multiple rows */
+}
+
+.container.apartments {
+    display: flex;
+    flex-wrap: wrap;  /* Allow wrapping to prevent squashing */
+    gap: 20px;
+    justify-content: space-evenly; /* Distribute the items evenly */
+    width: 100%;  /* Use full width */
+    align-items: stretch; /* Ensure items stretch to the same height */
+}
+
+.apartment {
+    flex: 1 1 300px;  /* Allow cards to grow/shrink but maintain a minimum width */
+    max-width: 300px; /* Max width for each card */
+    height: auto; /* Let the height adjust dynamically */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s ease;
+    padding: 0;               /* Remove any unnecessary padding */
+    margin: 0 0 10px 0; 
+    margin-bottom: 20px;  /* Add space between cards */
+    display: flex;
+    flex-direction: column; /* Arrange content vertically */
+}
+
+
+.apartment header p,
+.apartment footer p {
+    color: black;  /* Set the text color to black */
+}
+
+.apartment:hover {
+    transform: scale(1.05);  /* Slightly enlarge apartment on hover */
+}
+
+/* Apartment Image */
+/* Remove link styles from images inside the apartment cards */
+.apartment img {
+    width: 100%;  /* Ensure image uses full width */
+    height: 200px;  /* Set a fixed height */
+    object-fit: cover;  /* Maintain the image’s aspect ratio */
+    display: block;  /* Remove inline-block spacing */
+}
+
+/* Remove blue button-like styling for links wrapping the image */
+.apartment a img {
+    border: none;  /* Remove any border around the image */
+    text-decoration: none;  /* Remove underline on hover */
+    color: inherit; /* Inherit text color */
+}
+
+/* Remove default link styles for image links */
+.apartment a {
+    text-decoration: none;  /* Remove underline */
+    color: inherit;  /* Ensure the link doesn't change the image color */
+}
+
+/* Apartment Footer */
+.apartment footer {
+    text-align: center;
+    padding: 20px 10px;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;  /* Ensure footer content aligns at the bottom */
+    height: auto;               /* Allow footer height to adjust based on content */
+    box-sizing: border-box;      /* Ensure padding and border are included in the width/height */
+}
+
+/* Hyperlinked Text Instead of Button */
+.apartment-link {
+    color: black;  
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 10px;  /* Add some spacing */
+}
+
+.apartment-link:hover {
+    text-decoration: underline;  /* Underline on hover */
+}
+
+/* Tighten the apartment card header */
+/* Apartment card header */
+.apartment.card.titles {
+    padding: 0; /* Remove padding */
+    margin: 0;  /* Remove margin */
+    text-align: center;  /* Center the text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* Center content vertically */
+    align-items: center;  /* Center content horizontally */
+    line-height: 1;  /* Further reduce line-height */
+}
+
+/* Header title (h2) styles */
+.apartment.card.titles h2 {
+    margin: 0;  /* Remove margin around the title */
+    padding: 0; /* Remove padding */
+    font-size: 18px;  /* Adjust font size */
+    line-height: 1;  /* Reduce line height for tighter space */
+    text-align: center;  /* Center text */
+    width: 100%;  /* Ensure full width */
+}
+
+/* City paragraph (p) styles */
+.apartment.card.titles p.city {
+    margin: 0;  /* Remove any margin */
+    padding: 0;  /* Remove padding */
+    font-size: 14px;  /* Adjust font size */
+    color: #555;  /* Subtle color for city */
+    line-height: 1;  /* Further reduce line height */
+    text-align: center;  /* Center text */
+    width: 100%;  /* Ensure full width */
+}
+
+
+/* If there's additional padding applied to header elements, reset it */
+.apartment.card.titles header {
+    padding: 0;               /* Remove padding from the header if any */
+    margin: 0;                /* Remove margin from the header */
+}
+
+/* Ensure Services Section Aligns Properly */
+.services {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.services img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Form Centering */
+form {
+    margin: 20px auto;
+    padding: 20px;
+    width: 400px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Label Styling */
+label {
+    display: block;
+    font-size: 14px;
+    color: #005f99;
+    margin-bottom: 8px;
+}
+
+/* Input Fields Styling */
+input[type="text"],
+input[type="number"],
+input[type="url"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cce0ff;
+    border-radius: 4px;
+    background-color: #f9fbff;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Textarea resize limit */
+textarea {
+    resize: vertical;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+    background-color: #007acc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0px 4px 10px rgba(0, 122, 204, 0.3);
+}
+
+button[type="submit"]:hover {
+    background-color: #005f99;
+}
+
+/* Alert message styles */
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.alert-success {
+    background-color: #cceeff;
+    color: #004080;
+}
+
+.alert-danger {
+    background-color: #ffcccc;
+    color: #800000;
+}
+
+/* Flex container for apartment details and reservation form */
+.apartment-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 20px;
+    flex-wrap: wrap;  /* This allows content to wrap on smaller screens */
+}
+
+.apartment-details {
+    flex: 2;
+}
+
+.reservation-form {
+    flex: 1;
+    border: 1px solid #cce0ff;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9fbff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Detail Apartment Page Specific Styles */
+article.container {
+    max-width: 1000px; /* Limit width for better readability */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Apartment image styling */
+article img {
+    width: 100%; /* Full width of container */
+    max-height: 400px; /* Limit height for aesthetics */
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Admin Deactivate/Reactivate Button */
+.btn-warning {
+    background-color: #FFCC00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px 0;
+}
+
+.btn-warning:hover {
+    background-color: #FFA500;
+}
+
+/* Search Form Styles */
+.search-form {
+    width: 400px;  /* Adjust the form width to keep it centered */
+    padding: 20px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9fbff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.search-form h2 {
+    text-align: center;
+    font-size: 20px;
+    color: #005f99;
+    width: 100%; /* Make the heading full width */
+}
+
+/* Form Label Styling */
+.search-form label {
+    font-size: 18px;
+    color: #005f99;
+    width: 100%; /* Make the labels full width */
+}
+
+.search-form input[type="text"],
+.search-form input[type="number"],
+.search-form input[type="date"],
+.search-form select {
+    flex: 1;                /* Maintain flexibility */
+    min-width: 280px;        /* Increase the minimum width of input fields */
+    padding: 12px;           /* Slightly increase padding for better appearance */
+    margin-bottom: 10px;
+    border: 1px solid #cce0ff;
+    border-radius: 4px;
+    background-color: #f9fbff;
+    font-size: 16px;         /* Increase font size for better readability */
+    box-sizing: border-box;
+}
+
+/* Search Button */
+.search-form button[type="submit"] {
+    background-color: #007acc;
+    color: white;
+    padding: 12px;           /* Slightly larger padding for better balance */
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;         /* Increase font size for the button label */
+    cursor: pointer;
+    flex-basis: 100%;        /* Ensure the button still takes up full width */
+}
+
+.search-form button[type="submit"]:hover {
+    background-color: #005f99;
+}
+
+/* Success message styling */
+.message-container .alert.success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Padding for the message */
+    margin-bottom: 20px; /* Spacing below the message */
+    font-size: 16px;
+    text-align: center;
+}
+
+/* General layout styling */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Buttons styling for links */
+a.button-link {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue button */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Spacing between buttons */
+}
+
+a.button-link:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header__nav {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .header__button {
+        margin-top: 10px;
+    }
+
+    .container.apartments {
+        flex-direction: column;
+        width: 100%; /* Allow full width on small screens */
+    }
+
+    .apartment {
+        width: 100%; /* Take up full width on small screens */
+        max-width: 100%;
+    }
+
+    .search-form {
+        width: 100%; /* Make the search form full width on smaller screens */
+        margin-top: 20px;
+    }
+
+    .apartment-content {
+        flex-direction: column;
+    }
+
+    .reservation-form {
+        margin-top: 20px;
+    }
+}
+
+
+/* Additional Photos Gallery */
+.additional-photos {
+    margin-top: 20px;
+}
+
+.photo-gallery {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.photo {
+    width: 150px;  
+    text-align: center;
+}
+
+.photo img {
+    width: 100%;  
+    height: auto;
+    border-radius: 5px;
+}
+
+.photo p {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}

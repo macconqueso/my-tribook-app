@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <%- include('../partials/header.ejs', { success_msg: success_msg, error_msg: error_msg, isAdmin: isAdmin }) %>
+</head>
+<body>
+    <h1>Add New Apartment</h1>
+
+    <% if (success_msg) { %>
+        <div class="alert alert-success">
+            <%= success_msg %>
+        </div>
+    <% } %>
+
+    <% if (error_msg) { %>
+        <div class="alert alert-danger">
+            <%= error_msg %>
+        </div>
+    <% } %>
+
+    <!-- Form to add a new apartment -->
+    <form action="/admin/apartment/add-new" method="POST">
+        <!-- Title -->
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <!-- Description -->
+        <div>
+            <label for="description">Description:</label>
+            <textarea rows="5" name="description" id="description" required></textarea>
+        </div>
+
+        <!-- Rules -->
+        <div>
+            <label for="rules">Rules:</label>
+            <textarea rows="3" name="rules" id="rules" required></textarea>
+        </div>
+
+        <!-- Rooms -->
+        <div>
+            <label for="rooms">Rooms:</label>
+            <input type="number" id="rooms" name="rooms" required>
+        </div>
+
+        <!-- Beds -->
+        <div>
+            <label for="beds">Beds:</label>
+            <input type="number" id="beds" name="beds" required>
+        </div>
+
+        <!-- Number of Bathrooms -->
+        <div>
+            <label for="numBathrooms">Number of Bathrooms:</label>
+            <input type="number" id="numBathrooms" name="numBathrooms" required>
+        </div>
+
+        <!-- Max People -->
+        <div>
+            <label for="maxPeople">Max People:</label>
+            <input type="number" id="maxPeople" name="maxPeople" required>
+        </div>
+
+        <!-- Price per Night -->
+        <div>
+            <label for="pricePerNight">Price per Night:</label>
+            <input type="number" id="pricePerNight" name="pricePerNight" min="0" required>
+        </div>
+
+        <!-- Square Meters -->
+        <div>
+            <label for="squareMeters">Square Meters:</label>
+            <input type="number" id="squareMeters" name="squareMeters" min="0" required>
+        </div>
+
+        <!-- Main Photo URL -->
+        <div>
+            <label for="mainPhoto">Main Photo URL:</label>
+            <input type="url" id="mainPhoto" name="mainPhoto" required>
+        </div>
+
+        <!-- Location (Province, City, GPS Coordinates) -->
+        <h3>Location</h3>
+        <div>
+            <label for="province">Province:</label>
+            <input type="text" id="province" name="location[province]" required>
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="location[city]" required>
+        </div>
+        <div>
+            <label for="latitude">Latitude:</label>
+            <input type="number" step="any" id="latitude" name="location[gpsCoordinates][0]" required>
+        </div>
+        <div>
+            <label for="longitude">Longitude:</label>
+            <input type="number" step="any" id="longitude" name="location[gpsCoordinates][1]" required>
+        </div>
+
+        <!-- Services -->
+        <div>
+            <label>Services:</label>
+            <label><input type="checkbox" name="services[airConditioning]"> Air Conditioning</label>
+            <label><input type="checkbox" name="services[heating]"> Heating</label>
+            <label><input type="checkbox" name="services[adaptedForReducedMobility]"> Adapted for Reduced Mobility</label>
+            <label><input type="checkbox" name="services[television]"> Television</label>
+            <label><input type="checkbox" name="services[kitchen]"> Kitchen</label>
+            <label><input type="checkbox" name="services[internet]"> Internet</label>
+        </div>
+
+        <!-- Additional Photos -->
+        <h3>Additional Photos</h3>
+        <div>
+            <label for="additionalPhoto1">Additional Photo 1 URL:</label>
+            <input type="url" id="additionalPhoto1" name="additionalPhotos[0][url]">
+            <label for="additionalPhotoCaption1">Caption 1:</label>
+            <input type="text" id="additionalPhotoCaption1" name="additionalPhotos[0][caption]">
+        </div>
+        <div>
+            <label for="additionalPhoto2">Additional Photo 2 URL:</label>
+            <input type="url" id="additionalPhoto2" name="additionalPhotos[1][url]">
+            <label for="additionalPhotoCaption2">Caption 2:</label>
+            <input type="text" id="additionalPhotoCaption2" name="additionalPhotos[1][caption]">
+        </div>
+        <div>
+            <label for="additionalPhoto3">Additional Photo 3 URL:</label>
+            <input type="url" id="additionalPhoto3" name="additionalPhotos[2][url]">
+            <label for="additionalPhotoCaption3">Caption 3:</label>
+            <input type="text" id="additionalPhotoCaption3" name="additionalPhotos[2][caption]">
+        </div>
+
+        <!-- Add Apartment Button -->
+        <button type="submit">Add Apartment</button>
+    </form>
+</body>
+
+<footer>
+    <%- include('../partials/footer.ejs') %>
+</footer>
+</html>
+

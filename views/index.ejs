@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <%- include('./partials/header.ejs', { success_msg: success_msg, error_msg: error_msg, isAdmin: isAdmin }) %>
+</head>
+
+<body>
+    <h1>Search Apartments</h1>
+
+    <!-- Search Form -->
+    <form action="/search" method="get" class="search-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="minPeople">Min People:</label>
+                <input type="number" id="minPeople" name="minPeople" required>
+            </div>
+            <div class="form-group">
+                <label for="maxPrice">Max Price:</label>
+                <input type="number" id="maxPrice" name="maxPrice" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate">
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Apartment Containers -->
+    <main class="container apartments">
+        <% apartments.forEach(ap => { %>
+            <article class="apartment">
+                <div>
+                    <a href="/apartment/<%= ap._id %>">
+                    <img src="<%= ap.mainPhoto %>" alt="<%= ap.title %>">
+                    </a>
+                </div>
+                <header class="apartment card titles">
+                    <h2><%= ap.title %></h2>
+                    <% if (ap.location && ap.location.city) { %>
+                        <p class="city"><%= ap.location.city %></p>
+                    <% } %>
+                </header>
+                <footer>
+                    <p><%= ap.pricePerNight %> € per night</p>
+                    <p><%= ap.squareMeters %> m²</p>
+
+                    <div class="services">
+                        <% if (ap.services.airConditioning) { %>
+                            <img src="/icons/airConditioning.png" alt="Air Conditioning">
+                        <% } %>
+                        <% if (ap.services.heating) { %>
+                            <img src="/icons/heating.png" alt="Heating">
+                        <% } %>
+                        <% if (ap.services.adaptedForReducedMobility) { %>
+                            <img src="/icons/reducedMobilityAccess.png" alt="Reduced Mobility">
+                        <% } %>
+                        <% if (ap.services.television) { %>
+                            <img src="/icons/television.png" alt="Television">
+                        <% } %>
+                        <% if (ap.services.kitchen) { %>
+                            <img src="/icons/kitchen.png" alt="Kitchen">
+                        <% } %>
+                        <% if (ap.services.internet) { %>
+                            <img src="/icons/internet.png" alt="Internet">
+                        <% } %>
+                    </div>
+                    <!-- Updated: Hyperlink instead of button -->
+                    <a href="/apartment/<%= ap._id %>" class="apartment-link">View Apartment</a>
+                </footer>
+            </article>
+        <% }); %>
+    </main>
+
+    <footer>
+        <%- include('./partials/footer.ejs') %>
+    </footer>
+</body>
+</html>

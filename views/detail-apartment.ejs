@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <%- include('./partials/header.ejs', { success_msg: success_msg, error_msg: error_msg, isAdmin: isAdmin }) %>
+</head>
+
+<body>
+    <article class="container">
+        <% if (selectedApartment) { %>
+            <h1><%= selectedApartment.title %></h1>
+            <header>
+                <%= (selectedApartment.pricePerNight * 0.9).toFixed(2) %> € per night
+            </header>
+            <img src="<%= selectedApartment.mainPhoto %>" alt="Main photo of <%= selectedApartment.title %>">
+
+            
+            <div class="additional-photos">
+                <h3>More Photos</h3>
+                <% if (selectedApartment.additionalPhotos && selectedApartment.additionalPhotos.length > 0) { %>
+                    <div class="photo-gallery">
+                        <% selectedApartment.additionalPhotos.forEach(function(photo) { %>
+                            <div class="photo">
+                                <img src="<%= photo.url %>" alt="<%= photo.caption %>">
+                                <p><%= photo.caption %></p>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <p>No additional photos available.</p>
+                <% } %>
+            </div>
+
+            <div class="apartment-content">
+                <div class="apartment-details">
+                    <div>
+                        <h3>Description</h3>
+                        <%= selectedApartment.description %>
+                    </div>
+                    <div>
+                        <h4>Details</h4>
+                        <p>Rooms: <%= selectedApartment.rooms %></p>
+                        <p>Beds: <%= selectedApartment.beds %></p>
+                        <p>Max People: <%= selectedApartment.maxPeople %></p>
+                        <p>Size: <%= selectedApartment.squareMeters %> m<sup>2</sup></p>
+                    </div>
+
+                   
+                    <div>
+                        <h4>Rules</h4>
+                        <p><%= selectedApartment.rules %></p>
+                    </div>
+
+                    
+                    <% if (selectedApartment.location) { %>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Province: <%= selectedApartment.location.province || 'N/A' %></p>
+                            <p>City: <%= selectedApartment.location.city || 'N/A' %></p>
+                            <p>Coordinates: 
+                                [<%= selectedApartment.location.gpsCoordinates && selectedApartment.location.gpsCoordinates[0] %>, 
+                                <%= selectedApartment.location.gpsCoordinates && selectedApartment.location.gpsCoordinates[1] %>]
+                            </p>
+                        </div>
+                    <% } else { %>
+                        <p>Location details not available.</p>
+                    <% } %>
+                </div>
+
+                <% if (!isAdmin) { %>
+                    <form action="/apartment/new-reservation" method="POST" class="reservation-form">
+                        <input type="hidden" name="idApartment" value="<%= selectedApartment._id %>">
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="startDate">Start Date:</label>
+                            <input type="date" name="startDate" id="startDate" required>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="endDate">End Date:</label>
+                            <input type="date" name="endDate" id="endDate" required>
+                        </div>
+                    
+                        <button type="submit" class="btn btn-primary">Book Apartment</button>
+                    </form>
+                <% } %>
+            </div>
+        <% } else { %>
+            <p>Apartment details not found.</p>
+        <% } %>
+
+       
+        <% if (isAdmin) { %>
+            <form action="/admin/apartment/<%= selectedApartment._id %>/deactivate" method="POST">
+                <button type="submit" class="btn btn-warning">
+                    <%= selectedApartment.isActive ? 'Deactivate' : 'Reactivate' %>
+                </button>
+            </form>
+        <% } %>
+    </article>
+</body>
+
+<footer class="footer">
+    <% if (isAdmin) { %>
+         <a href="/admin/apartment/<%= selectedApartment._id %>/edit/" class="edit-link">Edit Apartment</a>
+    <% } %>
+</footer>
+
+</html>

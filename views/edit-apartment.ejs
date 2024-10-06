@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Apartment</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <%- include('./partials/header.ejs', { success_msg: success_msg, error_msg: error_msg, isAdmin: isAdmin }) %>
+</head>
+<body>
+    <h1>Edit Apartment</h1>
+
+    <% if (success_msg) { %>
+        <div class="alert alert-success"><%= success_msg %></div>
+    <% } %>
+
+    <% if (error_msg) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+    <% } %>
+
+    <!-- Form to update the apartment -->
+    <form action="/admin/apartment/<%= apartment._id %>/edit" method="POST">
+        <!-- Apartment Title -->
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" value="<%= apartment.title %>" required>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required><%= apartment.description %></textarea>
+        </div>
+
+        <!-- Rules -->
+        <div class="form-group">
+            <label for="rules">Rules:</label>
+            <textarea id="rules" name="rules" required><%= apartment.rules %></textarea>
+        </div>
+
+        <!-- Price per Night -->
+        <div class="form-group">
+            <label for="pricePerNight">Price per Night:</label>
+            <input type="number" id="pricePerNight" name="pricePerNight" value="<%= apartment.pricePerNight %>" required>
+        </div>
+
+        <!-- Square Meters -->
+        <div class="form-group">
+            <label for="squareMeters">Size (Square Meters):</label>
+            <input type="number" id="squareMeters" name="squareMeters" value="<%= apartment.squareMeters %>" required>
+        </div>
+
+        <!-- Rooms -->
+        <div class="form-group">
+            <label for="rooms">Rooms:</label>
+            <input type="number" id="rooms" name="rooms" value="<%= apartment.rooms %>" required>
+        </div>
+
+        <!-- Beds -->
+        <div class="form-group">
+            <label for="beds">Beds:</label>
+            <input type="number" id="beds" name="beds" value="<%= apartment.beds %>" required>
+        </div>
+
+        <!-- Number of Bathrooms -->
+        <div class="form-group">
+            <label for="numBathrooms">Number of Bathrooms:</label>
+            <input type="number" id="numBathrooms" name="numBathrooms" value="<%= apartment.numBathrooms %>" required>
+        </div>
+
+        <!-- Max People -->
+        <div class="form-group">
+            <label for="maxPeople">Max People:</label>
+            <input type="number" id="maxPeople" name="maxPeople" value="<%= apartment.maxPeople %>" required>
+        </div>
+
+        <!-- Main Photo URL -->
+        <div class="form-group">
+            <label for="mainPhoto">Main Photo URL:</label>
+            <input type="url" id="mainPhoto" name="mainPhoto" value="<%= apartment.mainPhoto %>" required>
+        </div>
+
+        <!-- Location (Province, City, and GPS Coordinates) -->
+        <h3>Location</h3>
+        <div class="form-group">
+            <label for="province">Province:</label>
+            <input type="text" id="province" name="location[province]" value="<%= apartment.location ? apartment.location.province : '' %>" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="location[city]" value="<%= apartment.location ? apartment.location.city : '' %>" required>
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude:</label>
+            <input type="number" step="any" id="latitude" name="location[gpsCoordinates][0]" value="<%= apartment.location && apartment.location.gpsCoordinates ? apartment.location.gpsCoordinates[0] : '' %>" required>
+        </div>
+        <div class="form-group">
+            <label for="longitude">Longitude:</label>
+            <input type="number" step="any" id="longitude" name="location[gpsCoordinates][1]" value="<%= apartment.location && apartment.location.gpsCoordinates ? apartment.location.gpsCoordinates[1] : '' %>" required>
+        </div>
+
+        <!-- Services Section -->
+        <h3>Services</h3>
+        <div>
+            <label><input type="checkbox" name="services[airConditioning]" <%= apartment.services.airConditioning ? 'checked' : '' %>> Air Conditioning</label>
+            <label><input type="checkbox" name="services[heating]" <%= apartment.services.heating ? 'checked' : '' %>> Heating</label>
+            <label><input type="checkbox" name="services[adaptedForReducedMobility]" <%= apartment.services.adaptedForReducedMobility ? 'checked' : '' %>> Adapted for Reduced Mobility</label>
+            <label><input type="checkbox" name="services[television]" <%= apartment.services.television ? 'checked' : '' %>> Television</label>
+            <label><input type="checkbox" name="services[kitchen]" <%= apartment.services.kitchen ? 'checked' : '' %>> Kitchen</label>
+            <label><input type="checkbox" name="services[internet]" <%= apartment.services.internet ? 'checked' : '' %>> Internet</label>
+        </div>
+
+        <!-- Additional Photos Section -->
+        <h3>Additional Photos</h3>
+        <% for (let i = 0; i < 3; i++) { %>  <!-- Loop to ensure three input boxes -->
+            <div class="form-group">
+                <label for="additionalPhoto<%= i %>">Additional Photo URL:</label>
+                <input type="url" id="additionalPhoto<%= i %>" name="additionalPhotos[<%= i %>][url]" value="<%= apartment.additionalPhotos && apartment.additionalPhotos[i] ? apartment.additionalPhotos[i].url : '' %>">
+                <label for="additionalPhotoCaption<%= i %>">Caption:</label>
+                <input type="text" id="additionalPhotoCaption<%= i %>" name="additionalPhotos[<%= i %>][caption]" value="<%= apartment.additionalPhotos && apartment.additionalPhotos[i] ? apartment.additionalPhotos[i].caption : '' %>">
+            </div>
+        <% } %>
+
+        <!-- Update Apartment Details Button -->
+        <button type="submit" class="btn btn-primary">Update Apartment Details</button>
+    </form>
+
+</body>
+</html>
+
